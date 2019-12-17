@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Detect Faces Sample</title>
+    <script defer src="face-api.min.js"></script>
+    <script defer src="video.js"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <style>
+        .tablagen {
+            display: table;
+        }
+
+        .fila {
+            display: table-row;
+        }
+
+        .col {
+            display: table-cell;
+            padding: 12px;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="tablagen">
+        <div class="fila">
+            <div class="col">
+                <h1>Crear grupos:</h1>
+
+                <input type="text" name="inputPersonGroup" id="inputPersonGroup" value="" />
+                <button onclick="createPersonGroup()">Crear</button><br><br>
+
+                <label for="listGroup">Listado de grupos</label>
+                <br>
+                <textarea id="listGroup" name="listGroup" disabled class="UIInput"
+                    style="width:580px; height:120px;"></textarea>
+
+                <hr>
+
+                <h1>Crear personas:</h1>
+
+                <label for="inputPersonName">Nombre*</label>
+                <input type="text" name="inputPersonName" id="inputPersonName" value="" />
+
+                <br>
+
+                <label for="inputPersonGroupId">Id grupo de personas*</label>
+                <input type="text" name="inputPersonGroupId" id="inputPersonGroupId" value="linea_directa" />
+
+                <button onclick="createPerson()">Crear</button><br><br>
+
+                <label for="listPeople">Listado de personas:</label>
+                <br>
+                <textarea id="listPeople" name="listPeople" disabled class="UIInput"
+                    style="width:580px; height:120px;"></textarea>
+                <button onclick="getPeople()">Cargar lista</button>
+                <hr>
+
+                <h1>Agregar fotos:</h1>
+
+                <label for="inputPersonId">PersonId*</label>
+                <input type="text" name="inputPersonId" id="inputPersonId" value="" />
+
+                <br>
+
+                <label for="personGroupId">PersonGroupId*</label>
+                <input type="text" name="personGroupId" id="personGroupId" value="linea_directa" />
+
+                <br>
+                <br>
+
+                <label for="imageInput">Por URL</label>
+                <input type="text" name="imageInput" id="imageInput" value="" />
+
+                <button onclick="addFaceToPersonByUrl()">Subir foto</button>
+                <br>
+                <br>
+
+                <img id="blah" width="500" height="300" src="" alt="">
+                <br>
+                <label for="loadImageInput">Subir foto</label>
+                <input type='file' id="loadImageInput" onchange="readURL(this);" />
+
+
+                <hr>
+
+                <h1>Estado del entrenamiento</h1>
+                <label for="trainingStatus">Estado: </label>
+                <input type="text" name="trainingStatus" id="trainingStatus" value="" disabled />
+
+                <button onclick="submitTraining()">Realizar entrenamiento</button>
+            </div>
+            <div class="col">
+                <h1>Detector</h1>
+
+                <div style="position: relative" class="margin">
+                    <video id="video" autoplay muted playsinline></video>
+                    <canvas id="overlay" />
+                    <canvas width="640" id="canvas" height="480" style="display: inline;"></canvas>
+                </div>
+                <button onclick="startRecognition()">Comenzar reconocimiento</button>
+                <br>
+                <br>
+                <h4>Estado:</h4>
+                <h4 id="recognitionState">Sin validar</h4>
+
+                <hr>
+
+                <h3>Personas detectadas:</h3>
+                <textarea id="detectedPeople" name="detectedPeople" disabled class="UIInput"
+                    style="width:580px; height:120px;"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="imageProcessor.js"></script>
+    <script src="api.js"></script>
+    <script src="imageUploader.js"></script>
+</body>
+
+</html>
